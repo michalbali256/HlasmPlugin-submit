@@ -8,41 +8,38 @@
 
 HLASM Language Support is an extension that supports the High Level Assembler language. It provides code completion, highlighting and navigation features, shows mistakes in the source, and lets you trace how the conditional assembly is evaluated with a modern debugging experience.
 
+This repository contains source codes for the HLASM language support plugin along with its [documentation](documentation.pdf) and an example workspace that showcases its capabilities. The main repository for the project can be found on [GitHub](https://github.com/eclipse/che-che4z-lsp-for-hlasm).
+
 ## Getting Started
 
 To start using the HLASM Language Support extension, **follow these steps**:
 
-1. Install the extension.
-2. In **File** - **Open Folder...**, select the folder where your HLASM project is located.
-3. Open your HLASM source code (no file extension is needed) or create a new file.
-4. If the extension fails to auto-detect HLASM language, set it manually in the bottom-right corner of the VS Code window.  
-   The extension is now enabled on the opened file. If you have macro definitions in separate files or use the COPY instruction, proceed with the steps below to configure the extension to search for external files in the correct directories:
-5. After opening the HLASM file, two popups display. Select "Create pgm_conf.json with current program" and "Create empty proc_grps.json".  
-   The two configuration files are created in the `.hlasmplugin` subfolder.
-6. In the `proc_grps.json` file, fill the `libs` array with paths to folders with macro definitions and COPY files. For example, if you have your macro files in the `ASMMAC/` folder, type the string `"ASMMAC"` into the libs array.
-
-For a full explanation of the configuration, see the [Configuration](#Configuration) section.
+1. Install VS Code on your computer.
+2. In the VS Code, find the [HLASM Language Support](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.hlasm-language-support) extension and install it.
+2. In **File** - **Open Folder...**, select the `example_workspace` folder.
+3. Open `XXX`to see the opencode **TO BE DONE**
+...
 
 ## Language Features
 
-The HLASM Language Support extension parses and analyzes all parts of a HLASM program. It resolves all ordinary symbols, variable symbols and checks the validity of most instructions. The extension supports conditional and unconditional branching and can define global and local variable symbols. It can also expand macros and COPY instructions.
+The HLASM Language Support extension parses and analyzes all parts of a HLASM program. It resolves all ordinary symbols, variable symbols and checks the validity of most instructions. The extension supports conditional and unconditional branching and can define global and local variable symbols. It also expands macros and COPY instructions.
 
 ## LSP Features
 ### Highlighting
 The HLASM Language Support extension highlights statements with different colors for labels, instructions, operands, remarks and variables. Statements containing instructions that can have operands are highlighted differently to statements that do not expect operands. Code that is skipped by branching AIF, AGO or conditional assembly is not colored.
 
-![](readme_res/highligting.png)
+![](clients/vscode-hlasmplugin/readme_res/highligting.png)
 
 ### Autocomplete
 Autocomplete is enabled for the instruction field. While typing, a list of instructions starting with the typed characters displays. Selecting an instruction from the list completes it and inserts the default operands. Variables and sequence symbols are also filled with a value from their scope.
 
-![](readme_res/autocomplete.gif)
+![](clients/vscode-hlasmplugin/readme_res/autocomplete.gif)
 
 
 ### Go To Definition and Find All References
 The extension adds the 'go to definition' and 'find all references' functionalities. Use the 'go to definition' functionality to show definitions of variable symbols, ordinary symbols and macros, or open COPY files directly. Use the 'find all references' functionality to show all places where a symbol is used.
 
-![](readme_res/go_to_def.gif)
+![](clients/vscode-hlasmplugin/readme_res/go_to_def.gif)
 
 ## Macro Tracer
 
@@ -50,12 +47,7 @@ The macro tracer functionality allows you to track the process of assembling HLA
 
 The macro tracer is not a debugger. It cannot debug running executables, only track the compilation process.
 
-![](readme_res/tracer.gif)
-## Configuration
-
-### Macro Tracer Configuration
-
-To configure the macro tracer, **follow these steps**:
+### Configuring the Macro Tracer
 
 1. Open your workspace.
 2. In the left sidebar, click the bug icon to open the debugging panel.
@@ -63,10 +55,18 @@ To configure the macro tracer, **follow these steps**:
    A "select environment" prompt displays.
 4. Enter **HLASM Macro tracer**.  
    Your workspace is now configured for macro tracing.
-5. Open the file that you want to trace.
-6. Return to the debugging panel and press **F5** to start the debugging session.
 
-### External Macro Libraries and COPY Members
+### Using the Macro Tracer
+
+To run the macro tracer, open the file that you want to trace. Then press **F5** to open the debugging panel and start the debugging session.
+
+When the tracer stops at a macro or COPY instruction, you can select **step into** to open the macro or COPY file, or **step over** to skip to the next line.
+
+Breakpoints can be set before or during the debugging session.
+
+![](https://github.com/eclipse/che-che4z-lsp-for-hlasm/raw/master/clients/vscode-hlasmplugin/readme_res/tracer.gif)
+
+## External Macro Libraries and COPY Members
 The HLASM Language Support extension looks for locally stored members when a macro or COPY instruction is evaluated. The paths of these members are specified in two configuration files in the .hlasmplugin folder of the currently open workspace. Ensure that you configure these files before using macros from separate files or the COPY instruction.
 
 When you open a HLASM file or manually set the HLASM language for a file, you can choose to automatically create these files for the current program.
@@ -113,10 +113,15 @@ The following example specifies that GROUP1 is used when working with `source_co
       "program": "second_file",
       "pgroup": "GROUP2"
     },
-  ]
+  ],
+  "alwaysRecognize" : ["*.hlasm", "libs/*.asm"]
 }
 ```
 If you have the two configuration files configured as above and invoke the MAC1 macro from `source_code.hlasm`, the folder `ASMMAC/` in the current workspace is searched for a file with the exact name "MAC1". If that search is unsuccessful the folder `C:/SYS.ASMMAC` is searched. If that search is unsuccessful an error displays that the macro does not exist.
+
+There is also the option `alwaysRecognize` which takes an array of wildcards. It allows you to configure two things:
+- All files matching these wildcards will always be recognized as HLASM files. 
+- If an extension wildcard is defined, all macro and copy files with such extension may be used in the source code. For example, with the extension wildcard `*.hlasm`, a user may add macro `MAC` to his source code even if it is in a file called `Mac.hlasm`.
 
 The program field in `pgm_conf.json` supports wildcards, for example:
 ```
@@ -130,11 +135,3 @@ The program field in `pgm_conf.json` supports wildcards, for example:
 }
 ```
 In this example, GROUP1 is used for all open code programs.
-
-<!-- Uncomment, once we have gone open source
-
-## Questions, issues, feature requests, and contributions
-- If you have a question about how to accomplish something with the extension, or come across a problem file an issue on [GitHub](https://github.com/eclipse/che-che4z-lsp-for-hlasm)
-- Contributions are always welcome! Please see our [GitHub](https://github.com/eclipse/che-che4z-lsp-for-hlasm) repository for more information.
-- Any and all feedback is appreciated and welcome!
--->
