@@ -1,0 +1,13 @@
+{
+  "pgms": [
+    {
+      "program": "tutorial",
+      "pgroup": "P1"
+    },
+    {
+      "program": "empty",
+      "pgroup": "P1"
+    }
+  ],
+  "alwaysRecognize": []
+}
