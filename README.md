@@ -16,9 +16,8 @@ To start using the HLASM Language Support extension, **follow these steps**:
 
 1. Install VS Code on your computer.
 2. In the VS Code, find the [HLASM Language Support](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.hlasm-language-support) extension and install it.
-2. In **File** - **Open Folder...**, select the `example_workspace` folder.
-3. Open `XXX`to see the opencode **TO BE DONE**
-...
+3. In **File** - **Open Folder...**, select the `example_workspace` folder.
+4. There are several example files that show different behavior of HLASM. `tutorial.hlasm` shows the basics.
 
 ## Language Features
 
@@ -50,8 +49,8 @@ The macro tracer is not a debugger. It cannot debug running executables, only tr
 ### Configuring the Macro Tracer
 
 1. Open your workspace.
-2. In the left sidebar, click the bug icon to open the debugging panel.
-3. Click the cog icon in the top left of the screen.  
+2. In the left sidebar, click the bug icon to open the debugging panel (Ctrl + Shift + D).
+3. Click `create a launch.json file`.
    A "select environment" prompt displays.
 4. Enter **HLASM Macro tracer**.  
    Your workspace is now configured for macro tracing.
