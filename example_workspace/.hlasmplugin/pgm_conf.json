@@ -1,13 +1,13 @@
 {
   "pgms": [
     {
-      "program": "tutorial",
+      "program": "tutorial.hlasm",
       "pgroup": "P1"
     },
     {
-      "program": "empty",
+      "program": "empty.hlasm",
       "pgroup": "P1"
     }
   ],
-  "alwaysRecognize": []
+  "alwaysRecognize": ["*.hlasm"]
 }
