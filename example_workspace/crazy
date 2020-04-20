@@ -1,16 +1,3 @@
-* In this file you can find some interesting use cases in HLASM
-
-* FORWARD DEPENDENCY
-* an example of a forward dependency where instruction lengths are 
-* forward dependent on resolved length of different instructions
-    DS CL(LEN) LEN is not yet defined, instruction cannot be resolved
-ADDR DS CL(SIZE) Depends on SIZE, SIZE is not yet defined,             X
-               instruction cannot be resolved
-
-HERE DS 0C     HERE is defined, instruction is resolved
-LEN EQU HERE-ADDR Depends on ADDR, ADDR is not yet resolved,           X
-               intruction cannot be resolved
-SIZE EQU 1 SIZE is defined -> ADDR is resolved -> LEN is resolved
 
 * MACRO CYCLES
 * it is possible to recursively call macro from itself
@@ -21,3 +8,12 @@ SIZE EQU 1 SIZE is defined -> ADDR is resolved -> LEN is resolved
     MEND 
 
     MAC
+    
+
+    AGO .SKIPRUBBISH
+    Anything in here is just skipped.
+    And it is still valid hlasm source code.
+.SKIPRUBBISH ANOP
+
+
+
