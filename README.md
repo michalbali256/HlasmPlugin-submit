@@ -6,9 +6,9 @@
 <img src="https://sonarcloud.io/images/project_badges/sonarcloud-black.svg" width="94" height="20" href="" />
 </a>
 
-HLASM Language Support is an extension that supports the High Level Assembler language. It provides code completion, highlighting and navigation features, shows mistakes in the source, and lets you trace how the conditional assembly is evaluated with a modern debugging experience.
+HLASM Language Support is an Visual Studio Code extension that supports the High Level Assembler language. It provides code completion, highlighting and navigation features, shows mistakes in the source, and lets you trace how the conditional assembly is evaluated with a modern debugging experience.
 
-This repository contains source codes for the HLASM language support plugin along with its [documentation](documentation.pdf) and an example workspace that showcases its capabilities. The main repository for the project can be found on [GitHub](https://github.com/eclipse/che-che4z-lsp-for-hlasm).
+This repository contains source codes for the [HLASM Language Support](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.hlasm-language-support) plugin along with its [documentation](documentation.pdf) and an example workspace that showcases its capabilities. The main repository for the project can be found on [GitHub](https://github.com/eclipse/che-che4z-lsp-for-hlasm).
 
 ## Getting Started
 
