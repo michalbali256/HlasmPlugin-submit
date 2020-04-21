@@ -10,7 +10,7 @@ To start using the HLASM Language Support extension, **follow these steps**:
 
 1. Install VS Code on your computer.
 2. In the VS Code, find the [HLASM Language Support](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.hlasm-language-support) extension and install it.
-3. In **File** - **Open Folder...**, select the `example_workspace` folder.
+3. In **File** - **Open Folder...**, select the [`example_workspace`](example_workspace) folder.
 4. There are several example files that show different behavior of HLASM. `tutorial.hlasm` shows the basics.
 
 ## Language Features
